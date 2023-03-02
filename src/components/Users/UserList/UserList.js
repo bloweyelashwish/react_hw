@@ -11,7 +11,7 @@ export const UserList = ({ users }) => {
     <ul className={classes.list}>
       {users.map((user) => (
         <li key={user._id}>
-          <User {...user}/>
+          <User user={user}/>
         </li>
       ))}
     </ul>
