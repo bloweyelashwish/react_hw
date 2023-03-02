@@ -1,0 +1,21 @@
+.control {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    width: 100%;
+}
+
+.label {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.input {
+    background-color: white;
+    outline: none;
+    border: none;
+    border: 1px solid steelblue;
+    border-radius: .25rem;
+    padding: .5rem;
+    min-height: 2.5rem;
+}

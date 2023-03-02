@@ -1,0 +1,14 @@
+.list {
+    list-style: none;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    padding-inline: 4rem;
+}
+
+.fallback {
+    font-weight: 500;
+    font-size: 32px;
+    text-align: center;
+}
