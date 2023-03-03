@@ -56,9 +56,11 @@ export const Stopwatch = () => {
 
   const toggleHandler = () => setIsRunning(!isRunning);
   const stopHandler = () => {
-    if (!isRunning) return;
+    if (!isRunning) {
+      return;
+    }
 
-    toggleHandler();
+    setIsRunning(false);
     setSavedTime([...savedTime, timeParser(time)]);
   };
   const resetHandler = () => {

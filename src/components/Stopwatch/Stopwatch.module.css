@@ -39,7 +39,7 @@
   margin: 0;
   font-size: 1.25rem;
   display: grid;
-  grid-template-rows: repeat(5, 45px);
+  grid-template-rows: repeat(20, 45px);
   align-items: first baseline;
   column-gap: 2rem;
   grid-auto-flow: column;
