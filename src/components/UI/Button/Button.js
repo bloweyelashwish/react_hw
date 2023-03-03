@@ -1,6 +1,6 @@
 import classes from "./Button.module.css";
 
-export const Button = ({ classNames, type, text, onClick }) => {
+export const Button = ({ classNames, type, text, onClick, ...props }) => {
   return (
     <button
       onClick={onClick}

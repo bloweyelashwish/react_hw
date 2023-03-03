@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { Button } from "../UI/Button/Button";
 import { localStorageService } from "../../services/local-storage.service";
+import { debounce } from "../../utils/general.utils";
 import classes from "./Stopwatch.module.css";
 
 const StopwatchSavedTimeTable = ({ timeList }) => {
   return (
     <ul className={classes.list}>
       {timeList.map((timeString) => (
-        <li key={timeString}>{timeString}</li>
+        <li key={timeString + Date.now() + Math.random()}>{timeString}</li>
       ))}
     </ul>
   );
@@ -15,6 +16,9 @@ const StopwatchSavedTimeTable = ({ timeList }) => {
 
 export const Stopwatch = () => {
   const STORAGE_KEY = "react_stopwatch";
+  const CLICK_SOUND = new Audio(
+    "https://www.soundjay.com/buttons/sounds/beep-07a.mp3"
+  );
 
   const [time, setTime] = useState(0);
   const [savedTime, setSavedTime] = useState([]);
@@ -50,16 +54,27 @@ export const Stopwatch = () => {
     return `${HH}:${MM}:${SS}:${MS}`;
   };
 
-  const timerToggle = () => setIsRunning(!isRunning);
+  const toggleHandler = () => setIsRunning(!isRunning);
   const stopHandler = () => {
     if (!isRunning) return;
 
-    timerToggle();
+    toggleHandler();
     setSavedTime([...savedTime, timeParser(time)]);
   };
   const resetHandler = () => {
     setTime(0);
     stopHandler();
+  };
+
+  const commands = {
+    reset: () => resetHandler(),
+    toggle: () => toggleHandler(),
+    stop: () => stopHandler(),
+  };
+
+  const clickHandler = (type) => {
+    CLICK_SOUND.play();
+    commands[type]();
   };
 
   return (
@@ -70,21 +85,25 @@ export const Stopwatch = () => {
           <Button
             classNames={classes.start}
             text="Start"
-            onClick={timerToggle}
+            onClick={debounce(() => clickHandler("toggle"))}
           />
         )}
         {!isRunning && !!time && (
           <Button
             classNames={classes.continue}
             text="Continue"
-            onClick={timerToggle}
+            onClick={debounce(() => clickHandler("toggle"))}
           />
         )}
-        <Button classNames={classes.stop} text="Stop" onClick={stopHandler} />
+        <Button
+          classNames={classes.stop}
+          text="Stop"
+          onClick={debounce(() => clickHandler("stop"))}
+        />
         <Button
           classNames={classes.reset}
           text="Reset"
-          onClick={resetHandler}
+          onClick={debounce(() => clickHandler("reset"))}
         />
       </div>
       {!!savedTime.length && <StopwatchSavedTimeTable timeList={savedTime} />}
