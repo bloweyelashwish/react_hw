@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "../UI/Button/Button";
-import { localStorageService } from "../../services/local-storage.service";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { debounce } from "../../utils/general.utils";
 import classes from "./Stopwatch.module.css";
 
@@ -15,14 +15,13 @@ const StopwatchSavedTimeTable = ({ timeList }) => {
 };
 
 export const Stopwatch = () => {
-  const STORAGE_KEY = "react_stopwatch";
   const CLICK_SOUND = new Audio(
     "https://www.soundjay.com/buttons/sounds/beep-07a.mp3"
   );
 
   const [time, setTime] = useState(0);
-  const [savedTime, setSavedTime] = useState([]);
   const [isRunning, setIsRunning] = useState(false);
+  const [savedTime, setSavedTime] = useLocalStorage("stored_time", "");
 
   useEffect(() => {
     let timeInterval;
@@ -32,16 +31,6 @@ export const Stopwatch = () => {
 
     return () => clearInterval(timeInterval);
   }, [isRunning, time]);
-
-  useEffect(() => {
-    const storedTimeList = JSON.parse(localStorageService.getItem(STORAGE_KEY));
-    if (!storedTimeList) return;
-    setSavedTime(storedTimeList);
-  }, []);
-
-  useEffect(() => {
-    localStorageService.setItem(STORAGE_KEY, JSON.stringify(savedTime));
-  }, [savedTime]);
 
   const timeParser = (ms) => {
     const padDigits = (digit) => digit.toString().padStart(2, "0");
@@ -61,6 +50,7 @@ export const Stopwatch = () => {
     }
 
     setIsRunning(false);
+    console.log(savedTime);
     setSavedTime([...savedTime, timeParser(time)]);
   };
   const resetHandler = () => {
