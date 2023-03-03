@@ -50,7 +50,6 @@ export const Stopwatch = () => {
     }
 
     setIsRunning(false);
-    console.log(savedTime);
     setSavedTime([...savedTime, timeParser(time)]);
   };
   const resetHandler = () => {
