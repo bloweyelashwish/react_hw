@@ -1,0 +1,46 @@
+.stopwatch {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1rem;
+}
+
+.timer {
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+.start {
+  background-color: green;
+}
+
+.stop {
+  background-color: red;
+}
+
+.continue {
+  background-color: purple;
+}
+
+.reset {
+  background-color: orange;
+}
+
+.controls {
+  display: flex;
+  column-gap: 0.5rem;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.25rem;
+  display: grid;
+  grid-template-rows: repeat(5, 45px);
+  align-items: first baseline;
+  column-gap: 2rem;
+  grid-auto-flow: column;
+}
