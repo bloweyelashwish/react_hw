@@ -4,13 +4,13 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { debounce } from "../../utils/general.utils";
 import classes from "./Stopwatch.module.css";
 
-const StopwatchSavedTimeTable = ({ timeList }) => {
+const StopwatchHistory = ({ history }) => {
   return (
-    <ul className={classes.list}>
-      {timeList.map((timeString) => (
-        <li key={timeString + Date.now() + Math.random()}>{timeString}</li>
+    <ol className={classes.list}>
+      {history.map((timeString, idx) => (
+        <li key={idx}>{timeString}</li>
       ))}
-    </ul>
+    </ol>
   );
 };
 
@@ -21,7 +21,7 @@ export const Stopwatch = () => {
 
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
-  const [savedTime, setSavedTime] = useLocalStorage("stored_time", "");
+  const [timeHistory, setTimeHistory] = useLocalStorage("stored_time", "");
 
   useEffect(() => {
     let timeInterval;
@@ -50,7 +50,7 @@ export const Stopwatch = () => {
     }
 
     setIsRunning(false);
-    setSavedTime([...savedTime, timeParser(time)]);
+    setTimeHistory([...timeHistory, timeParser(time)]);
   };
   const resetHandler = () => {
     setTime(0);
@@ -97,7 +97,7 @@ export const Stopwatch = () => {
           onClick={debounce(() => clickHandler("reset"))}
         />
       </div>
-      {!!savedTime.length && <StopwatchSavedTimeTable timeList={savedTime} />}
+      {!!timeHistory.length && <StopwatchHistory history={timeHistory} />}
     </div>
   );
 };
