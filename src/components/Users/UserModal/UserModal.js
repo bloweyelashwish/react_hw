@@ -16,18 +16,17 @@ const UserInfo = ({ info }) => {
       valueToRender = value;
     }
     return (
-      <p key={name} className={classes.field}>
-        <span>{idx + 1}) </span>
+      <li key={name} className={classes.field}>
         <span className={classes.type}>{name}: </span>
         <span>{valueToRender}</span>
-      </p>
+      </li>
     )
   });
 
   return (
-    <div className={classes.info}>
+    <ol className={classes.info}>
       {mappedInfo}
-    </div>
+    </ol>
   )
 }
 
