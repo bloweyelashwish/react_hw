@@ -50,3 +50,13 @@
     bottom: 0;
     width: 100%;
 }
+
+.button {
+    border: 1px solid black;
+    border-radius: .5rem;
+    padding: 0.5rem;
+    background-color: white;
+    color: black;
+    font-size: 1.15rem;
+    cursor: pointer;
+}

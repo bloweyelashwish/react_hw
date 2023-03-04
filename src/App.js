@@ -22,8 +22,8 @@ export const App = () => {
 
   const sortByType = {
     'all': () => filterUsers(query),
-    'asc': () => [...filterUsers(query)].sort((u1, u2) => u1.age - u2.age),
-    'desc': () => [...filterUsers(query)].sort((u1, u2) => u2.age - u1.age),
+    'asc': () => filterUsers(query).sort((u1, u2) => u1.age - u2.age),
+    'desc': () => filterUsers(query).sort((u1, u2) => u2.age - u1.age),
   }
 
   const sortHandler = (type) => {

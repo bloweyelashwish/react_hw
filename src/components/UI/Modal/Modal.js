@@ -15,7 +15,7 @@ const ModalOverlay = ({ children, onClose, title }) => {
         {children}
       </div>
       <div className={classes.footer}>
-        <button onClick={onClose}>Close</button>
+        <button className={classes.button} onClick={onClose}>Close</button>
       </div>
     </div>
   )
