@@ -26,7 +26,7 @@ export const Stopwatch = () => {
   useEffect(() => {
     let timeInterval;
     if (isRunning) {
-      timeInterval = setInterval(() => setTime(time + 1), 10);
+      timeInterval = setInterval(() => setTime(time + 1), 100);
     }
 
     return () => clearInterval(timeInterval);
