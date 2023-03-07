@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "../UI/Button/Button";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-import { debounce } from "../../utils/general.utils";
+import { debounce, timeParser } from "../../utils/general.utils";
 import classes from "./Stopwatch.module.css";
 
 const StopwatchHistory = ({ history }) => {
@@ -26,22 +26,11 @@ export const Stopwatch = () => {
   useEffect(() => {
     let timeInterval;
     if (isRunning) {
-      timeInterval = setInterval(() => setTime(time + 1), 100);
+      timeInterval = setInterval(() => setTime(time + 1), 10);
     }
 
     return () => clearInterval(timeInterval);
   }, [isRunning, time]);
-
-  const timeParser = (ms) => {
-    const padDigits = (digit) => digit.toString().padStart(2, "0");
-
-    const HH = padDigits(Math.floor(time / 360000));
-    const MM = padDigits(Math.floor((time % 360000) / 6000));
-    const SS = padDigits(Math.floor((time % 6000) / 100));
-    const MS = padDigits(ms % 100);
-
-    return `${HH}:${MM}:${SS}:${MS}`;
-  };
 
   const toggleHandler = () => setIsRunning(!isRunning);
   const stopHandler = () => {
