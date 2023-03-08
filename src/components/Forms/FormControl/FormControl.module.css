@@ -1,0 +1,14 @@
+.form-control {
+    width: 100%;
+}
+
+.input {
+    width: 100%;
+    padding: 0.35rem 0.5rem ;
+    border: 1px solid #b1b4ba;
+    border-radius: 0.25rem;
+}
+
+.input:focus {
+    outline: 1px solid rgb(116, 116, 218);
+}

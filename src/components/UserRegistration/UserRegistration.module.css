@@ -1,0 +1,24 @@
+.wrapper {
+    padding: 2rem;
+    background-color: #FCFCFD;
+    border: 1px solid #E4E7EC;
+    border-radius: 0.25rem;
+    max-width: 40rem;
+    margin-inline: auto;
+}
+
+.title {
+    margin: 0;
+    text-align: center;
+}
+
+.content {
+    margin-top: 1rem;
+}
+
+.actions {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
