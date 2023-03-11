@@ -10,7 +10,13 @@ export const FormControl = ({ name, id, label, ...props }) => {
       <label htmlFor={uid} name={name} className={classes.label}>
         {label}
       </label>
-      <input name={name} id={uid} {...props} className={classes.input} />
+      <input
+        type="text"
+        name={name}
+        id={uid}
+        {...props}
+        className={classes.input}
+      />
     </div>
   );
 };

@@ -4,12 +4,13 @@ const initialState = {
   firstName: "",
   lastName: "",
   email: "",
-  password: "",
   city: "",
   street: "",
   building: "",
-  photo: null,
+  avatar: "",
+  password: "",
   currentStep: 0,
+  isSubmitted: false,
 };
 
 const registrationReducer = (state, action) => {
@@ -35,11 +36,14 @@ const registrationReducer = (state, action) => {
     case "BUILDING_CHANGE": {
       return { ...state, building: action.payload };
     }
-    case "PHOTO_CHANGE": {
-      return { ...state, photo: action.payload };
+    case "AVATAR_CHANGE": {
+      return { ...state, avatar: action.payload };
     }
     case "STEP_CHANGE": {
       return { ...state, currentStep: action.payload };
+    }
+    case "SUBMIT_CHANGE": {
+      return { ...state, isSubmitted: true };
     }
     default:
       throw new Error(`Invalid action type: ${action.type}`);

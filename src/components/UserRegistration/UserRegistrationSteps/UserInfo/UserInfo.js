@@ -1,5 +1,5 @@
 import { useRegistrationContext } from "../../../../contexts/useRegistrationContext";
-import { FormControl, Form } from "../../../Forms";
+import { FormControl, FormWrapper } from "../../../Forms";
 
 export const UserInfo = () => {
   const [state, dispatch] = useRegistrationContext();
@@ -16,13 +16,14 @@ export const UserInfo = () => {
   };
 
   return (
-    <Form title="User info">
+    <FormWrapper title="User info">
       <FormControl
         name="name"
         onChange={firstNameChangeHandler}
         value={firstName}
         label="First name"
         placeholder="John"
+        required={true}
       />
       <FormControl
         name="last_name"
@@ -30,14 +31,17 @@ export const UserInfo = () => {
         value={lastName}
         label="Last name"
         placeholder="Doe"
+        required={true}
       />
       <FormControl
+        type="email"
         name="email"
         onChange={emailChangeHandler}
         value={email}
         label="Email"
         placeholder="example@mail.com"
+        required={true}
       />
-    </Form>
+    </FormWrapper>
   );
 };
