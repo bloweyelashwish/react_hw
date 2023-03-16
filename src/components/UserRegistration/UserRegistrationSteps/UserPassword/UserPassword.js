@@ -2,8 +2,7 @@ import { useRegistrationContext } from "../../../../contexts/useRegistrationCont
 import { FormWrapper, FormControl } from "../../../Forms";
 
 export const UserPassword = () => {
-  const [state, dispatch] = useRegistrationContext();
-  const { password } = state;
+  const [, dispatch] = useRegistrationContext();
 
   const passwordChangeHandler = ({ target }) => {
     if (!target.value.length) {

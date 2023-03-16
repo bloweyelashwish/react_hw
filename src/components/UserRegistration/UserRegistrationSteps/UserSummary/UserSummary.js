@@ -8,7 +8,7 @@ export const UserSummary = () => {
 
   return (
     <FormWrapper>
-      <Avatar avatar={avatar} />
+      <Avatar src={avatar} />
       <div style={{ textAlign: "center" }}>
         <p style={{ fontWeight: 600 }}>Contact Information</p>
         <div>
