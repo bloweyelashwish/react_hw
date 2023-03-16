@@ -13,10 +13,6 @@ export const UserPassword = () => {
     dispatch({ type: "PASSWORD_CHANGE", payload: target.value });
   };
 
-  const passwordConfirmationHandler = ({ target }) => {
-    console.log(password);
-  };
-
   return (
     <FormWrapper>
       <FormControl
@@ -30,7 +26,6 @@ export const UserPassword = () => {
       <FormControl
         type="password"
         name="password_confirmation"
-        onClick={passwordConfirmationHandler}
         placeholder="Confirm your password"
         label="Password confirmation"
         required={true}
