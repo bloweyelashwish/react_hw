@@ -1,14 +1,19 @@
 import { useRegistrationContext } from "../../contexts/useRegistrationContext";
-import { UserAddress, UserInfo, UserAvatar } from "./UserRegistrationSteps";
+import {
+  UserAddress,
+  UserInfo,
+  UserAvatar,
+  UserPassword,
+  UserSummary,
+} from "./UserRegistrationSteps";
 import { Form } from "../Forms";
 import { Button } from "../UI/Button/Button";
 
 import classes from "./UserRegistration.module.css";
-import { UserPassword } from "./UserRegistrationSteps/UserPassword/UserPassword";
 
 export const UserRegistration = () => {
   const [state, dispatch] = useRegistrationContext();
-  const { currentStep } = state;
+  const { currentStep, isSubmitted } = state;
 
   const steps = [
     <UserInfo />,
@@ -31,26 +36,33 @@ export const UserRegistration = () => {
     if (!isLastStep) {
       return nextStepHandler();
     } else {
-      console.log(123);
+      dispatch({ type: "SUBMIT_CHANGE" });
     }
   };
 
   return (
     <Form onSubmit={submitHandler}>
       <div className={classes.wrapper}>
-        <h2 className={classes.title}>Step: {currentStep + 1}</h2>
-        <div className={classes.content}>{steps[currentStep]}</div>
-        <div className={classes.actions}>
-          {!isFirstStep && (
-            <Button text="Previous step" onClick={prevStepHandler} />
-          )}
-          <Button
-            text={isLastStep ? "Submit" : "Next step"}
-            // onClick={isLastStep ? submitHandler : nextStepHandler}
-            type="submit"
-            className="button--dark"
-          />
+        <h2 className={classes.title}>
+          {isSubmitted
+            ? "Thank you for registration"
+            : `Step: ${currentStep + 1}`}
+        </h2>
+        <div className={classes.content}>
+          {isSubmitted ? <UserSummary /> : steps[currentStep]}
         </div>
+        {!isSubmitted && (
+          <div className={classes.actions}>
+            {!isFirstStep && (
+              <Button text="Previous step" onClick={prevStepHandler} />
+            )}
+            <Button
+              text={isLastStep ? "Submit" : "Next step"}
+              type="submit"
+              className="button--dark"
+            />
+          </div>
+        )}
       </div>
     </Form>
   );
